@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, ChevronDown, LayoutDashboard, LogOut } from "lucide-react";
+import {
+  Sparkles,
+  ChevronDown,
+  LayoutDashboard,
+  LogOut,
+  LogIn,
+  UserPlus
+} from "lucide-react";
 
 function Home() {
   const navigate = useNavigate();
@@ -73,7 +80,28 @@ function Home() {
               History
             </Link>
 
-            {/* Profile Dropdown */}
+            {/* If NOT Logged In */}
+            {!user && (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-sm bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition flex items-center gap-2"
+                >
+                  <LogIn size={16} />
+                  Login
+                </Link>
+
+                <Link
+                  to="/register"
+                  className="px-4 py-2 text-sm bg-slate-900 text-white rounded-full hover:bg-black transition flex items-center gap-2"
+                >
+                  <UserPlus size={16} />
+                  Register
+                </Link>
+              </>
+            )}
+
+            {/* If Logged In */}
             {user && (
               <div className="relative">
                 <button
@@ -119,6 +147,7 @@ function Home() {
                 )}
               </div>
             )}
+
           </div>
         </div>
       </header>
